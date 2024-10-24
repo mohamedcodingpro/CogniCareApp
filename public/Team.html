@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meet the Team</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      rel="stylesheet" />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(to bottom right, #0a74da, #f7931e);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 2px solid #fff;
+        display: inline-block;
+        padding-bottom: 5px;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 30px;
+      }
+
+      .team-member {
+        perspective: 1000px;
+      }
+
+      .flip-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.8s ease;
+      }
+
+      .team-member:hover .flip-card {
+        transform: rotateY(180deg);
+      }
+
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 15px;
+      }
+
+      .flip-card-back {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .flip-card-front {
+        background: rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        border: 4px solid transparent;
+        background-clip: padding-box;
+      }
+
+      .flip-card-front:before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 15px;
+        background: linear-gradient(45deg, #0a74da, #f7931e, #f9a825, #0a74da);
+        background-size: 200% 200%;
+        animation: borderAnimation 5s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes borderAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .member-photo {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 15px 15px 0 0;
+      }
+
+      .member-info {
+        padding: 20px;
+      }
+
+      .member-name {
+        font-size: 1.5rem;
+        margin: 0;
+      }
+
+      .member-role {
+        font-size: 1rem;
+        color: #e0c9f4;
+        margin: 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .member-bio {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #f3e8ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Meet the Team</h1>
+      <div class="team-grid">
+        <!-- Kopano Mabuya -->
+        <div class="team-member">
+          <div class="flip-card">
+            <div class="flip-card-front">
+              <img
+                src="./Kopano.jfif"
+                alt="Kopano Mabuya"
+                class="member-photo" />
+              <div class="member-info">
+                <h2 class="member-name">Kopano Mabuya</h2>
+                <p class="member-role">BCom in Information Management</p>
+                <p class="member-bio">
+                  Kopano is the UI design visionary behind our application,
+                  assisting in crafting a beautiful UI design with innovative
+                  tools and ensuring a seamless user interface for our
+                  application.
+                </p>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h3>Fun Fact:</h3>
+              <p>
+                The bravest thing Kopano has ever done was demonstrate one of
+                her projects to a live audience!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Traicy-->
+        <div class="team-member">
+          <div class="flip-card">
+            <div class="flip-card-front">
+              <img src="./Tracy.jfif" alt="Traicy" class="member-photo" />
+              <div class="member-info">
+                <h2 class="member-name">Traicy Marutla</h2>
+                <p class="member-role">BCom in Industrial Psychology</p>
+                <p class="member-bio">
+                  Traicy holds a BCom in Industrial Psychology from the
+                  University of Johannesburg. Her role in the team was to craft
+                  stunning frontend end designs and user interface, transforming
+                  ideas into visually engaging designs with modern technologies.
+                </p>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h3>Fun Fact:</h3>
+              <p>Traicy is a foodie and loves to explore new coffee shops!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motlalepula-->
+        <div class="team-member">
+          <div class="flip-card">
+            <div class="flip-card-front">
+              <img
+                src="./Makhanya.jfif"
+                alt="Motlalepula Makhanya"
+                class="member-photo" />
+              <div class="member-info">
+                <h2 class="member-name">Motlalepula Makhanya</h2>
+                <p class="member-role">BTech in Electrical Engineering</p>
+                <p class="member-bio">
+                  Motlalepula holds a BTech in Electrical Engineering from the
+                  University of Johannesburg. His role in the team was build the
+                  establish the backend of our application, ensuring proper
+                  integration and efficient data management for a smooth user
+                  experience.
+                </p>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h3>Fun Fact:</h3>
+              <p>Motlalepula is a gamer at heart & also a car fanatic!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mohamed-->
+        <div class="team-member">
+          <div class="flip-card">
+            <div class="flip-card-front">
+              <img
+                src="./Mohamed.jfif"
+                alt="Mohamed"
+                class="member-photo" />
+              <div class="member-info">
+                <h2 class="member-name">Mohamed Abdirahman</h2>
+                <p class="member-role">Bsc Honours in Computing</p>
+                <p class="member-bio">
+                  Mohamed holds a Bsc Honours in Computing from the University
+                  of South Africa. His role was assist with the overall
+                  functionality of the application & developing predictive
+                  models that drive our application’s core functionality and
+                  insights.
+                </p>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h3>Fun Fact:</h3>
+              <p>
+                Mohamed enjoys working on big projects & loves attending
+                Hackathons!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

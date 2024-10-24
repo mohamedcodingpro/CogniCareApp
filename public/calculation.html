@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Ability Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #023047;
+            margin-bottom: 20px;
+        }
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px;
+            width: calc(100% - 40px);
+            border: 1px solid #219ebc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #fb8500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ffb703;
+        }
+        #timer {
+            font-size: 18px;
+            color: #219ebc;
+            margin-bottom: 10px;
+        }
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #023047;
+        }
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fb8500;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculation Ability Test</h1>
+    <div class="game-container">
+        <div id="timer">Time Remaining: <span id="time">10</span> seconds</div>
+        <div id="question-container"></div>
+        <input type="number" id="user-answer" placeholder="Your answer" />
+        <button onclick="checkAnswer()">Submit</button>
+        <div id="result"></div>
+        <p>Score: <span id="score">0</span></p>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let currentQuestionIndex = 0;
+        let timer;
+        const totalTime = 10; // Total time for each question
+        const questions = [
+            { question: "5 + 3", answer: 8 },
+            { question: "12 - 4", answer: 8 },
+            { question: "3 * 7", answer: 21 },
+            { question: "20 / 4", answer: 5 }
+        ];
+
+        function startGame() {
+            score = 0;
+            currentQuestionIndex = 0;
+            document.getElementById('score').textContent = score;
+            document.getElementById('result').textContent = '';
+            document.getElementById('user-answer').value = '';
+            document.getElementById('time').textContent = totalTime;
+            document.getElementById('user-answer').style.display = 'block'; // Show input field again
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                document.getElementById('question-container').textContent = questions[currentQuestionIndex].question;
+                startTimer();
+            } else {
+                endGame();
+            }
+        }
+
+        function startTimer() {
+            let timeRemaining = totalTime;
+            document.getElementById('time').textContent = timeRemaining;
+            timer = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('time').textContent = timeRemaining;
+                if (timeRemaining <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('result').textContent = 'Time is up! Correct answer was ' + questions[currentQuestionIndex].answer;
+                    score--; // Deduct points if time runs out
+                    document.getElementById('score').textContent = score;
+                    currentQuestionIndex++;
+                    displayQuestion();
+                }
+            }, 1000);
+        }
+
+        function checkAnswer() {
+            clearInterval(timer);
+            const userAnswer = parseInt(document.getElementById('user-answer').value);
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            if (userAnswer === correctAnswer) {
+                score++;
+                document.getElementById('result').textContent = 'Correct!';
+            } else {
+                document.getElementById('result').textContent = 'Wrong! The correct answer was: ' + correctAnswer;
+            }
+            currentQuestionIndex++;
+            document.getElementById('score').textContent = score;
+            document.getElementById('user-answer').value = '';
+            displayQuestion();
+        }
+
+        function endGame() {
+            document.getElementById('question-container').textContent = 'Game Over! Final Score: ' + score;
+            document.getElementById('user-answer').style.display = 'none'; // Hide input field after game ends
+        }
+    </script>
+</body>
+</html>

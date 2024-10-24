@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/public/styles.css">
+    <style>
+        /* General body and font styling */
+        
+
+        header {
+            background-color: #219ebc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #023047;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #8ecae6;
+            color: #023047;
+        }
+
+        /* How-To Section */
+        section {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #how-to-use {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #how-to-use h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #023047;
+            border-bottom: 2px solid #219ebc;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: whitesmoke !important;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.4em;
+            color: #219ebc;
+        }
+
+        .card p {
+            margin: 8px 0;
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #023047;
+            color: white;
+            margin-top: 40px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer a {
+            color: #8ecae6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        .footer-text {
+            margin: 0;
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                padding: 10px 15px;
+                width: 100%;
+                text-align: center;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            #how-to-use {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Dementia Risk Prediction and Recommender Application</h1>
+    </header>
+    <a href="/public/settings.html"><img src="burger.png" alt="chatbot" style="width:80px;height:83px;float:right"></a>
+
+    <nav>
+        <a href="/public/caregiver.html">Caregiver</a>
+        <a href="/public/patient.html">Patient</a>
+        <a href="/public/health.html">Health Specialist</a>
+        <!-- <a href="/public/settings.html">Settings</a> -->
+    </nav>
+
+    <section id="how-to-use">
+        <h2>How to Use This Application</h2>
+
+        <div class="card">
+            <h3>1. Caregiver Section</h3>
+            <p>The Caregiver section allows users responsible for individuals with dementia to manage their care
+                routines, receive helpful recommendations, and track the patient's progress. To navigate, click on the
+                "Caregiver" button in the menu above.</p>
+        </div>
+
+        <div class="card">
+            <h3>2. Patient Section</h3>
+            <p>The Patient section is designed for individuals who want to monitor their cognitive health or those at
+                risk of dementia. Click the "Patient" button to access tools such as dementia risk prediction, cognitive
+                tests, and personalized recommendations.</p>
+        </div>
+
+        <div class="card">
+            <h3>3. Health Specialist Section</h3>
+            <p>The Health Specialist section enables professionals to assist patients by viewing prediction results and
+                offering expert guidance. Click the "Health Specialist" button to explore the features tailored for
+                professionals.</p>
+        </div>
+
+        <div class="card">
+            <h3>4. Settings</h3>
+            <p>In the Settings section, users can manage their account details, privacy settings, and notifications.
+                Click the "Settings" button to customize your experience in the application.</p>
+        </div>
+
+        <div class="card">
+            <h3>5. Getting Started</h3>
+            <p>To start using the application, navigate to your respective section (Caregiver, Patient, or Health
+                Specialist), and follow the instructions provided. You can generate dementia risk predictions, view
+                recommendations, or adjust account settings as needed.</p>
+        </div>
+
+        <div class="card">
+            <h3>6. Predictions and Recommendations</h3>
+            <p>After navigating to the "Patient" section, use the dementia risk prediction tool by entering the
+                necessary data, and view the results and personalized recommendations. Caregivers and health specialists
+                can use this data to provide better care and guidance.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">&copy; 2024 Parallel Universe Group. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

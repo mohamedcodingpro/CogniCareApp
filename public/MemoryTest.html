@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #023047;
+            margin-bottom: 20px;
+        }
+        #game-board {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .number-box {
+            background-color: #219ebc;
+            color: white;
+            font-size: 2rem;
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        #input-sequence {
+            margin: 20px 0;
+        }
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            margin: 5px;
+            border: 1px solid #219ebc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #fb8500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ffb703;
+        }
+    </style>
+</head>
+<body>
+    <!-- Memory Game Section -->
+    <h1>Memory Test</h1>
+    <p>Remember the sequence of numbers!</p>
+    <div id="game-board"></div>
+    <div id="input-sequence">
+        <input type="text" id="userInput" placeholder="Enter the sequence">
+        <button onclick="checkSequence()">Submit</button>
+    </div>
+    <p id="result"></p>
+    <p><strong>Score:</strong> <span id="memory-score">0</span></p>
+    <button onclick="startMemoryGame()">Start Memory Game</button>
+
+    <script>
+        // Memory Game Logic
+        let memorySequence = [];
+        let memoryScore = 0;
+        let memoryLevel = 1;
+
+        function startMemoryGame() {
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('userInput').value = '';
+            generateMemorySequence();
+        }
+
+        function generateMemorySequence() {
+            memorySequence = [];
+            for (let i = 0; i < memoryLevel; i++) {
+                const randomNumber = Math.floor(Math.random() * 10);
+                memorySequence.push(randomNumber);
+            }
+            displayMemorySequence();
+        }
+
+        function displayMemorySequence() {
+            const gameBoard = document.getElementById('game-board');
+            gameBoard.innerHTML = '';
+            memorySequence.forEach(number => {
+                const numberBox = document.createElement('div');
+                numberBox.classList.add('number-box');
+                numberBox.textContent = number;
+                gameBoard.appendChild(numberBox);
+            });
+            setTimeout(() => { gameBoard.innerHTML = ''; }, 2000);
+        }
+
+        function checkSequence() {
+            const userInput = document.getElementById('userInput').value.split('').map(Number);
+            const resultDisplay = document.getElementById('result');
+            if (JSON.stringify(userInput) === JSON.stringify(memorySequence)) {
+                memoryScore += memoryLevel;
+                resultDisplay.textContent = 'Correct! Leveling up...';
+                memoryLevel++;
+            } else {
+                resultDisplay.textContent = 'Incorrect! Try again!';
+                memoryScore -= 5;
+            }
+            document.getElementById('memory-score').textContent = memoryScore;
+            document.getElementById('userInput').value = '';
+            setTimeout(startMemoryGame, 1000);
+        }
+    </script>
+</body>
+</html>

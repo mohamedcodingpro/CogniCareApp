@@ -1,0 +1,587 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Dementia Risk Prediction and Recommender Application</h1>
+        <style>
+            h1 {
+                white-space: nowrap;
+                overflow: hidden;
+                box-sizing: border-box;
+                animation: marquee 20s linear infinite;
+
+            }
+
+            @keyframes marquee {
+                0% {
+                    transform: translateX(100%);
+                }
+
+                /* Start off-screen to the right */
+                100% {
+                    transform: translateX(-100%);
+                }
+
+                /* End off-screen to the left */
+            }
+        </style>
+        <img src="/public/Logo1-removebg-preview.png" class="logo">
+        <style>
+            .logo {
+                width: 100%;
+                /* Adjust the width as needed */
+                max-width: 350px;
+                /* Set a maximum width */
+                height: auto;
+                /* Maintain aspect ratio */
+                display: block;
+                margin: 0 auto;
+            }
+        </style>
+    </header>
+
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
+        <div style="display: flex; align-items: center;">
+            <!-- Home icon, toggles the dropdown on click -->
+            <div class="dropdown" id="homeIcon" style="cursor: pointer; display: flex; align-items: center;">
+                <img src="public/home-removebg-preview.png" alt="Home" style="width: 30px; height: 30px;">
+                <div id="dropdownContent" class="dropdown-content" style="position: absolute;">
+                    <button onclick="openTeamPage()">About Us</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 20px;">
+            <!-- Middle buttons -->
+            <a href="/public/registration.html">Sign Up</a>
+            <a href="/public/login.html">Login</a>
+            <a href="/public/contact.html">Contacts</a>
+            <a href="https://www.alzheimers.org.uk/news">Dementia News</a>
+        </div>
+        <div class="hamburger">
+            <!-- Hamburger button -->
+            <a href="/public/settings.html" class="hamburger-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </a>
+        </div>
+        <style>
+            nav {
+                display: flex;
+                /* Use flexbox for layout */
+                justify-content: space-between;
+                /* Space between links and hamburger */
+                align-items: center;
+                /* Center items vertically */
+                padding: 15px 20px;
+                /* Add padding */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links {
+                display: flex;
+                /* Use flexbox for the links */
+                justify-content: center;
+                /* Center the links */
+                gap: 20px;
+                /* Space between links */
+                flex-grow: 1;
+                /* Allow this section to take up available space */
+            }
+
+            nav a {
+                color: rgb(4, 62, 70);
+                text-decoration: none;
+                padding: 12px 24px;
+                font-size: 1.1em;
+                background: linear-gradient(45deg, #fb8500, #ffb703);
+                border-radius: 30px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            nav a:hover {
+                background: linear-gradient(45deg, #023047, #219ebc);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Hamburger button styling */
+            .hamburger {
+                display: inline-block;
+                /* Aligns the button */
+            }
+
+            .hamburger-icon {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                background-color: #0b87a3;
+                cursor: pointer;
+                
+            }
+
+            .bar {
+                width: 30px;
+                height: 5px;
+                background-color: #023047;
+                margin: 3px 0;
+                transition: background-color 0.3s ease;
+            }
+
+            .hamburger-icon:hover .bar {
+                background-color: #023047;
+                /* Change color on hover */
+            }
+        </style>
+    </nav>
+
+    <style>
+        /* Hidden dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        /* Style for dropdown button */
+        .dropdown-content button {
+            background-color: #219ebc;
+            border: none;
+            padding: 12px 16px;
+            text-align: left;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Hover effect for the button */
+        .dropdown-content button:hover {
+            background-color: #0b87a3;
+        }
+    </style>
+
+    <script>
+        // JavaScript function to toggle dropdown visibility
+        document.getElementById('homeIcon').addEventListener('click', function () {
+            var dropdown = document.getElementById('dropdownContent');
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none'; // Hide dropdown if it's already shown
+            } else {
+                dropdown.style.display = 'block'; // Show dropdown if it's hidden
+            }
+        });
+
+        // JavaScript function to open the Team page
+        function openTeamPage() {
+            window.location.href = './public/Team.html'; // Redirect to Team.html
+        }
+
+        // Optional: Close the dropdown if clicked outside of it
+        window.onclick = function (event) {
+            if (!event.target.closest('#homeIcon')) {
+                var dropdown = document.getElementById('dropdownContent');
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none'; // Close dropdown when clicking outside
+                }
+            }
+        }
+    </script>
+
+
+    </nav>
+    <style>
+        /* General Styles */
+
+
+        .back-btn {
+            margin-left: 20px;
+        }
+
+        .menu-btn {
+            margin-right: 20px;
+        }
+
+        section {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #023047;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            /* White background for cards */
+            border: 1px solid #e0e0e0;
+            /* Lighter border color */
+            border-radius: 12px;
+            /* Slightly larger border radius */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for depth */
+            padding: 20px;
+            /* Padding inside the card */
+            margin-bottom: 30px;
+            /* Space below each card */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Smooth transition effects */
+            font-family: 'Arial', sans-serif;
+            /* Consistent font style */
+        }
+
+        .card h3 {
+            font-size: 1.75rem;
+            /* Increased font size for headers */
+            color: #0077b6;
+            /* Soft blue color for headers */
+            margin-bottom: 15px;
+            /* More space below the header */
+            font-weight: 600;
+            /* Semi-bold text for emphasis */
+        }
+
+        .card p {
+            margin: 10px 0;
+            /* Space around paragraphs */
+            line-height: 1.7;
+            /* Improved line height for readability */
+            color: #333333;
+            /* Darker color for body text */
+        }
+
+        .card ul {
+            list-style-type: circle;
+            /* Change bullet style to circle */
+            margin-left: 20px;
+            /* Space for list items */
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            /* Space between list items */
+            padding-left: 5px;
+            /* Indentation for list items */
+            position: relative;
+            /* Position for pseudo-element */
+        }
+
+        .card ul li::before {
+            content: '';
+            /* Pseudo-element for custom bullet */
+            position: absolute;
+            left: -15px;
+            /* Position to the left of the text */
+            top: 6px;
+            /* Center the bullet vertically */
+            width: 6px;
+            /* Width of the bullet */
+            height: 6px;
+            /* Height of the bullet */
+            background-color: #0077b6;
+            /* Bullet color */
+            border-radius: 50%;
+            /* Make it a circle */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            /* Deeper shadow on hover */
+            border-color: #0077b6;
+            /* Change border color on hover */
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #023047;
+            color: white;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #8ecae6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            color: white;
+        }
+    </style>
+    <section id="introduction">
+
+
+        <style>
+            .slider {
+                position: relative;
+                max-width: 600px;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+
+            .slides {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+                width: 100%;
+            }
+
+            .slides input {
+                display: none;
+            }
+
+            .slide {
+                min-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .slide img {
+                width: 100%;
+                border-radius: 10px;
+                display: block;
+            }
+
+            /* Radio button navigation */
+            .navigation {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .navigation label {
+                display: inline-block;
+                width: 15px;
+                height: 15px;
+                margin: 5px;
+                background-color: #bbb;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            /* Style for the active radio button */
+            #radio1:checked~.slides {
+                transform: translateX(0);
+            }
+
+            #radio2:checked~.slides {
+                transform: translateX(-100%);
+            }
+
+            #radio3:checked~.slides {
+                transform: translateX(-200%);
+            }
+
+            #radio4:checked~.slides {
+                transform: translateX(-300%);
+            }
+
+            .navigation #radio1:checked+label,
+            .navigation #radio2:checked+label,
+            .navigation #radio3:checked+label,
+            .navigation #radio4:checked+label {
+                background-color: #333;
+            }
+        </style>
+        </head>
+
+        <div class="slider">
+            <!-- Radio buttons for controlling slides -->
+            <input type="radio" name="slider" id="radio1" checked>
+            <input type="radio" name="slider" id="radio2">
+            <input type="radio" name="slider" id="radio3">
+            <input type="radio" name="slider" id="radio4">
+
+            <div class="slides">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="/public/1.jfif" alt="Image 1" width="600px">
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="/public/2.jfif" alt="Image 2">
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="/public/3.jfif" alt="Image 3">
+                </div>
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <img src="/public/4.jfif" alt="Image 4">
+                </div>
+            </div>
+
+            <!-- Radio button labels as navigation -->
+            <div class="navigation">
+                <label for="radio1"></label>
+                <label for="radio2"></label>
+                <label for="radio3"></label>
+                <label for="radio4"></label>
+            </div>
+        </div>
+        <h2>Introduction</h2>
+        <p>Welcome to the Dementia Prediction and Recommendation Application, your comprehensive solution for early
+            detection and
+            management of cognitive decline. In today’s fast-paced world, detecting dementia early is critical for
+            enabling timely intervention and care. Our innovative platform harnesses the power of advanced algorithms
+            and machine learning to analyze data and identify early signs of dementia. This proactive approach can make
+            a significant difference in slowing disease progression, offering peace of mind to individuals and families
+            navigating the challenges of cognitive health. By integrating personalized assessments, we deliver insights
+            tailored to each user’s unique profile, allowing for more informed decision-making and better planning for
+            the future. Our application is not only a powerful tool for individuals but also serves as a critical
+            resource for
+            caregivers and healthcare providers. Understanding the progression of dementia is key to providing effective
+            care, and our platform equips caregivers with the information they need to support their loved ones more
+            effectively. With an intuitive interface and secure data handling, we ensure that navigating through the
+            results and recommendations is both user-friendly and safe. By combining technology with compassion, the
+            Dementia Prediction and Recommendation Application empowers users to take control of their cognitive health,
+            facilitating early
+            intervention and enhancing quality of life for those at risk of dementia.</p>
+    </section>
+    <style>
+        /* Basic styling for layout */
+
+
+        h1 {
+            margin: 0;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        #cognicare-section {
+            display: flex;
+            justify-content: space-between;
+            /* padding: 50px;
+            background-color: #8ecae6;
+            max-width: 1200px;
+            margin: 0 auto; */
+        }
+
+        #cognicare-section .content {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        #cognicare-section .video {
+            flex: 1;
+            max-width: 600px;
+            text-align: right;
+        }
+
+        #cognicare-section video {
+            width: 100%;
+            height: 350px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0f1938;
+            color: white;
+        }
+    </style>
+
+
+    <!-- Cognicare Section -->
+    <section id="cognicare-section">
+        <div class="content">
+            <h2>About Cognicare</h2>
+            <p>Cognicare is an innovative solution designed to help individuals and caregivers monitor and manage
+                cognitive health. By using predictive tools and advanced algorithms, Cognicare offers personalized
+                insights that assist in
+                detecting early signs of cognitive decline, helping you take proactive steps toward your well-being.
+                With Cognicare, you can track cognitive performance through simple and interactive assessments,
+                providing timely intervention strategies. Our mission is to make cognitive health management accessible
+                and
+                effective for everyone.</p>
+        </div>
+
+        <div class="video">
+            <!-- HTML5 video embedded -->
+            <video controls>
+                <source
+                    src="https://zmooz-bucket.s3.bhs.io.cloud.ovh.net/asset/media-fcfb7206-49d0-47e6-816a-2b3c20e45eaa/Cognicare-Web-App-A-One-Minute-Overview-DxVGx.mp4"
+                    type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission">
+        <h2>Our Mission</h2>
+        <p>Our mission is to empower individuals, caregivers, and healthcare professionals by providing them with
+            cutting-edge resources and technology to monitor cognitive health and detect early signs of dementia. We
+            believe that awareness and early detection are the cornerstones of effective dementia care, enabling
+            individuals to take control of their health while providing caregivers with the knowledge and tools
+            necessary for better support. By offering a platform that simplifies complex data into clear, actionable
+            insights, we aim to bridge the gap between early warning signs and timely intervention. Through continuous
+            innovation and a focus on accessibility, we strive to ensure that both those at risk and their caregivers
+            have the opportunity to prepare, adapt, and manage the challenges associated with cognitive decline.</p>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision">
+        <h2>Our Vision</h2>
+        <p>Our vision is to create a world where individuals can lead fulfilling lives, free from the burdens of
+            undetected cognitive decline. We aspire to foster an environment where early detection of dementia is
+            standard practice, allowing individuals and families to proactively address their cognitive health. By
+            integrating advanced technology and compassionate care, we envision a future where caregivers are equipped
+            with the necessary tools and resources to provide effective support. We aim to inspire a global conversation
+            about cognitive health, encouraging communities to prioritize awareness and education. Through collaboration
+            with healthcare providers and researchers, we seek to drive innovations that improve outcomes for those
+            affected by dementia and their loved ones.</p>
+    </section>
+    <section id="benefits">
+        <h2>Benefits</h2>
+        <div style="display: flex; align-items: center;">
+            <div style="flex: 1;">
+                <ul>
+                    <li>Early Detection: Spot potential dementia signs early for timely intervention.</li>
+                    <li>Personalized Insights: Get tailored predictions based on your data.</li>
+                    <li>User-Friendly: Easy navigation and clear results.</li>
+                    <li>Support for Caregivers: Provides tools to assist in managing cognitive health.</li>
+                    <li>Data Security: Your data is protected with high security standards.</li>
+                </ul>
+            </div>
+            <div style="flex: 1;">
+                <img src="/public/DALL·E 2024-10-23 13.26.44 - A sleek, modern web page design showing benefits of a dementia detection app. The page has a clean and professional layout, with a section titled 'Ben.webp"
+                    alt="Dementia Prediction Image" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer Section -->
+    <footer>
+        <p class="footer-text">&copy; 2024 Parallel Universe Group. All Rights Reserved.</p>
+
+    </footer>
+</body>
+
+</html>

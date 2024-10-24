@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attention Test: Replicate the Sequence</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            width: 320px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #219ebc;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffb703;
+        }
+
+        #result, #shape-container {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        #attention-score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #023047;
+        }
+
+        /* Attention Test Game CSS */
+        #shape-container {
+            margin: 20px 0;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .shape {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .circle {
+            border-radius: 50%;
+            background-color: #ffb703;
+        }
+
+        .square {
+            background-color: #023047;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid #8ecae6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Attention Test: Replicate the Sequence</h1>
+        <div id="shape-container"></div>
+        <div id="attention-result"></div>
+        <p>Score: <span id="attention-score">0</span></p>
+        <button onclick="startAttentionGame()" class="start-btn">Start Attention Test</button>
+    </div>
+
+    <script>
+        const shapes = ['circle', 'square', 'triangle'];
+        let sequence = [];
+        let userSequence = [];
+        let attentionScore = 0;
+        let currentRound = 0;
+        let roundTimer;
+
+        function startAttentionGame() {
+            attentionScore = 0;
+            sequence = [];
+            currentRound = 0;
+            document.getElementById('attention-score').textContent = attentionScore;
+            document.getElementById('attention-result').textContent = '';
+            nextRound();
+        }
+
+        function nextRound() {
+            currentRound++;
+            userSequence = [];
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            sequence.push(randomShape);
+            displaySequence();
+        }
+
+        function displaySequence() {
+            const shapeContainer = document.getElementById('shape-container');
+            shapeContainer.innerHTML = ''; 
+            sequence.forEach((shape, index) => {
+                setTimeout(() => {
+                    const shapeElement = document.createElement('div');
+                    shapeElement.classList.add('shape', shape);
+                    shapeContainer.appendChild(shapeElement);
+                    shapeElement.style.opacity = 1;
+                    setTimeout(() => {
+                        shapeElement.style.opacity = 0;
+                    }, 1000);
+                }, index * 1500);
+            });
+
+            setTimeout(() => {
+                getUserInput();
+                startRoundTimer();
+            }, sequence.length * 1500 + 1000);
+        }
+
+        function startRoundTimer() {
+            let timeRemaining = 10;
+            roundTimer = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('attention-result').textContent = 'Time Remaining: ' + timeRemaining;
+                if (timeRemaining <= 0) {
+                    clearInterval(roundTimer);
+                    document.getElementById('attention-result').textContent = 'Time is up! Final Score: ' + attentionScore;
+                }
+            }, 1000);
+        }
+
+        function getUserInput() {
+            const shapeContainer = document.getElementById('shape-container');
+            shapeContainer.innerHTML = '';
+            shapes.forEach(shape => {
+                const shapeElement = document.createElement('div');
+                shapeElement.classList.add('shape', shape);
+                shapeElement.style.opacity = 1;
+                shapeElement.onclick = () => checkShapeAnswer(shape);
+                shapeContainer.appendChild(shapeElement);
+            });
+        }
+
+        function checkShapeAnswer(shape) {
+            userSequence.push(shape);
+            if (userSequence[userSequence.length - 1] !== sequence[userSequence.length - 1]) {
+                document.getElementById('attention-result').textContent = 'Wrong! Final Score: ' + attentionScore;
+                return;
+            }
+
+            if (userSequence.length === sequence.length) {
+                attentionScore++;
+                document.getElementById('attention-score').textContent = attentionScore;
+                clearInterval(roundTimer);
+                setTimeout(nextRound, 1000);
+            }
+        }
+    </script>
+</body>
+</html>

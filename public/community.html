@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Forum</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #219ebc;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        #main-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        #discussion-threads {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #023047;
+        }
+
+        .post {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .post-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #023047;
+        }
+
+        .post-header span {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .post-content {
+            margin-top: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .post-actions {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .post-actions button {
+            background-color: #219ebc;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-actions button:hover {
+            background-color: #0277bd;
+        }
+
+        .post-actions .delete-button {
+            background-color: #ff6f61;
+        }
+
+        .post-actions .delete-button:hover {
+            background-color: #d9534f;
+        }
+
+        .like-button.liked {
+            background-color: #ffb703;
+        }
+
+        .reply-section {
+            margin-top: 10px;
+            padding-left: 20px;
+            border-left: 2px solid #219ebc;
+        }
+
+        .reply-section .reply {
+            margin-top: 10px;
+        }
+
+        .reply-section input[type="text"] {
+            width: calc(100% - 120px);
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #new-post {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #new-post textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        #new-post button {
+            align-self: flex-end;
+            background-color: #219ebc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #new-post button:hover {
+            background-color: #0277bd;
+        }
+
+        .nav-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #219ebc;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            #main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Community Forum</h1>
+        <link rel="stylesheet" href="/public/styles.css">
+        <label>
+            <input type="checkbox" id="theme-toggle">
+            <span>Toggle Dark Mode</span>
+        </label>
+    </header>
+
+    <div id="main-container">
+        <section id="discussion-threads">
+            <h2>New Post</h2>
+            <div id="new-post">
+                <textarea placeholder="What's on your mind?"></textarea>
+                <button id="post-button">Post</button>
+            </div>
+
+            <h2>Recent Posts</h2>
+
+            <div id="posts-container">
+                <!-- Posts will be dynamically inserted here -->
+            </div>
+        </section>
+    </div>
+
+    <div class="nav-links">
+        <p><a href="/public/dashboard.html">Back to Dashboard</a></p>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedIn')) {
+            alert('Please log in to access the forum.');
+            window.location.href = 'login.html';
+        }
+
+        const username = localStorage.getItem('username');
+
+        // Function to load previous posts from localStorage
+        function loadPosts() {
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+            document.getElementById('posts-container').innerHTML = ''; // Clear existing posts
+            posts.forEach((post, index) => {
+                addPostToDOM(post, index);
+            });
+        }
+
+        // Function to add a post to the DOM
+        function addPostToDOM(post, postIndex) {
+            const postsContainer = document.getElementById('posts-container');
+
+            const postDiv = document.createElement('div');
+            postDiv.classList.add('post');
+
+            const postHeader = document.createElement('div');
+            postHeader.classList.add('post-header');
+            postHeader.innerHTML = `<h3>${post.username}</h3><span>${new Date(post.timestamp).toLocaleString()}</span>`;
+
+            const postContent = document.createElement('div');
+            postContent.classList.add('post-content');
+            postContent.textContent = post.content;
+
+            const postActions = document.createElement('div');
+            postActions.classList.add('post-actions');
+            const likeButton = document.createElement('button');
+            likeButton.textContent = 'Like';
+            likeButton.classList.add('like-button');
+            likeButton.addEventListener('click', () => {
+                likeButton.classList.toggle('liked');
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('delete-button');
+            deleteButton.addEventListener('click', () => {
+                deletePost(postIndex);
+            });
+
+            postActions.appendChild(likeButton);
+            postActions.appendChild(deleteButton);
+            postDiv.appendChild(postHeader);
+            postDiv.appendChild(postContent);
+            postDiv.appendChild(postActions);
+
+            // Add a reply section for comments
+            const replySection = document.createElement('div');
+            replySection.classList.add('reply-section');
+            const replyInput = document.createElement('input');
+            replyInput.type = 'text';
+            replyInput.placeholder = 'Add a comment...';
+
+            const replyButton = document.createElement('button');
+            replyButton.textContent = 'Reply';
+            replyButton.classList.add('reply-button');
+            replyButton.addEventListener('click', () => {
+                const comment = replyInput.value;
+                if (comment) {
+                    addCommentToPost(postIndex, comment);
+                    replyInput.value = ''; // Clear input after comment
+                }
+            });
+
+            replySection.appendChild(replyInput);
+            replySection.appendChild(replyButton);
+
+            // Display existing comments
+            post.comments.forEach((comment, commentIndex) => {
+                addCommentToDOM(postIndex, comment, commentIndex, replySection);
+            });
+
+            postDiv.appendChild(replySection);
+            postsContainer.appendChild(postDiv);
+        }
+
+        // Function to add a comment to a post
+        function addCommentToPost(postIndex, comment) {
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+            const newComment = { username, content: comment, timestamp: Date.now() };
+            posts[postIndex].comments.push(newComment);
+            localStorage.setItem('posts', JSON.stringify(posts));
+            loadPosts();
+        }
+
+        // Function to add a comment to the DOM
+        function addCommentToDOM(postIndex, comment, commentIndex, replySection) {
+            const replyDiv = document.createElement('div');
+            replyDiv.classList.add('reply');
+            replyDiv.innerHTML = `<strong>${comment.username}:</strong> ${comment.content} <span style="color: #888; font-size: 12px;">(${new Date(comment.timestamp).toLocaleString()})</span>`;
+            replySection.appendChild(replyDiv);
+        }
+
+        // Function to delete a post
+        function deletePost(postIndex) {
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+            posts.splice(postIndex, 1); // Remove the post
+            localStorage.setItem('posts', JSON.stringify(posts));
+            loadPosts(); // Reload posts after deletion
+        }
+
+        document.getElementById('post-button').addEventListener('click', () => {
+            const content = document.querySelector('#new-post textarea').value;
+            if (content) {
+                const posts = JSON.parse(localStorage.getItem('posts')) || [];
+                const newPost = { username, content, timestamp: Date.now(), comments: [] };
+                posts.push(newPost);
+                localStorage.setItem('posts', JSON.stringify(posts));
+                document.querySelector('#new-post textarea').value = ''; // Clear input after posting
+                loadPosts();
+            } else {
+                alert('Please write something before posting.');
+            }
+        });
+
+        loadPosts(); // Initial load of posts
+    </script>
+</body>
+
+</html>

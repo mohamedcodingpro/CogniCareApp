@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Judgment Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #023047; /* Dark Blue */
+        }
+
+        #scenario-container {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #fb8500; /* Orange */
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #219ebc; /* Light Blue */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #ffb703; /* Yellow */
+        }
+
+        .start-btn {
+            background-color: #fb8500; /* Orange */
+            margin-top: 20px;
+        }
+
+        .start-btn:hover {
+            background-color: #ffb703; /* Yellow */
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #8ecae6; /* Light Blue-Gray */
+        }
+
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #023047; /* Dark Blue */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Judgment Test: Decision Making</h1>
+        <div id="scenario-container"></div>
+        <div id="options-container"></div>
+        <div id="result"></div>
+        <p>Score: <span id="score">0</span></p>
+        <button onclick="startGame()" class="start-btn">Start New Game</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let currentScenario = 0;
+
+        const scenarios = [
+            {
+                question: "You find a wallet on the street with R100 and an ID. What do you do?",
+                options: [
+                    "Take the money and leave the wallet.",
+                    "Try to find the owner and return it.",
+                    "Use the ID to find the owner online."
+                ],
+                answer: "Try to find the owner and return it."
+            },
+            {
+                question: "You witness a colleague cheating in an important meeting. What do you do?",
+                options: [
+                    "Report them to your boss.",
+                    "Confront them privately after the meeting.",
+                    "Ignore it and stay out of it."
+                ],
+                answer: "Confront them privately after the meeting."
+            },
+            {
+                question: "A friend asks you to lie for them about where they were last night. What do you do?",
+                options: [
+                    "Lie for them.",
+                    "Tell them it's wrong to lie.",
+                    "Say you can't help them."
+                ],
+                answer: "Tell them it's wrong to lie."
+            },
+            {
+                question: "You are given the opportunity to work on a project that could earn you a promotion, but it requires you to work weekends. What do you do?",
+                options: [
+                    "Take the project and work weekends.",
+                    "Decline the project for work-life balance.",
+                    "Negotiate to only work one weekend a month."
+                ],
+                answer: "Take the project and work weekends."
+            },
+            {
+                question: "You overhear a plan that could harm others. What do you do?",
+                options: [
+                    "Keep quiet to avoid trouble.",
+                    "Inform the authorities.",
+                    "Try to talk the person out of it."
+                ],
+                answer: "Inform the authorities."
+            }
+        ];
+
+        function startGame() {
+            score = 0; // Reset score
+            currentScenario = 0; // Reset scenario index
+            document.getElementById('score').textContent = score;
+            document.getElementById('result').textContent = '';
+            displayScenario();
+        }
+
+        function displayScenario() {
+            if (currentScenario < scenarios.length) {
+                const scenarioElement = scenarios[currentScenario];
+                document.getElementById('scenario-container').textContent = scenarioElement.question;
+
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = ''; // Clear previous options
+
+                scenarioElement.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.onclick = () => checkAnswer(option);
+                    optionsContainer.appendChild(button);
+                });
+            } else {
+                document.getElementById('scenario-container').textContent = 'Game Over! Final Score: ' + score;
+                document.getElementById('options-container').innerHTML = ''; // Clear options
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            const correctAnswer = scenarios[currentScenario].answer;
+
+            if (selectedOption === correctAnswer) {
+                score++;
+                document.getElementById('result').textContent = 'Correct!';
+            } else {
+                document.getElementById('result').textContent = 'Wrong! The correct answer was: ' + correctAnswer;
+            }
+
+            currentScenario++;
+            document.getElementById('score').textContent = score;
+            displayScenario();
+        }
+    </script>
+    
+</body>
+</html>

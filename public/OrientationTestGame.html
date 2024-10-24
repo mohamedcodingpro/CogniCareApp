@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientation Test Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            color: #023047; /* General text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #080808; /* Title color */
+            margin-bottom: 20px;
+        }
+
+        .game-container {
+            margin: 50px auto;
+            padding: 20px;
+            width: 350px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s;
+        }
+
+        .game-container:hover {
+            transform: scale(1.02); /* Slightly enlarge on hover */
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #219ebc; /* border color */
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #fb8500; /* border color on focus */
+            outline: none; /* remove outline */
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            background-color: #219ebc; /* button background color */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px; /* rounded corners */
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #ffb703; /* button hover color */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .start-btn {
+            margin-top: 20px;
+            background-color: #fb8500; /* start button color */
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #219ebc; /* result text color */
+            font-weight: bold; /* Make result bold */
+        }
+
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #023047; /* score color */
+            margin-top: 10px;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 400px) {
+            .game-container {
+                width: 90%; /* Take up more width on smaller screens */
+            }
+
+            input, button {
+                width: 100%; /* Full width for inputs and buttons */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Orientation Test: Time and Place</h1>
+        <div id="question-container"></div>
+        <input type="text" id="answer" placeholder="Your answer here">
+        <button onclick="submitAnswer()">Submit</button>
+        <div id="result"></div>
+        <p>Score: <span id="score">0</span></p>
+        <button onclick="startGame()" class="start-btn">Start New Game</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let currentQuestion = 0;
+        const questions = [
+            {
+                question: "What is the current year?",
+                answer: new Date().getFullYear().toString()
+            },
+            {
+                question: "What is the current month (numeric)?",
+                answer: (new Date().getMonth() + 1).toString()
+            },
+            {
+                question: "What is the current day of the month?",
+                answer: new Date().getDate().toString()
+            },
+            {
+                question: "What is the current hour (24-hour format)?",
+                answer: new Date().getHours().toString()
+            },
+            {
+                question: "What is the name of your city?",
+                answer: "YourCity" // Change to your desired default city
+            }
+        ];
+
+        function startGame() {
+            score = 0; // Reset score
+            currentQuestion = 0; // Reset question index
+            document.getElementById('score').textContent = score;
+            document.getElementById('result').textContent = '';
+            document.getElementById('answer').value = '';
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById('question-container').textContent = questions[currentQuestion].question;
+            } else {
+                document.getElementById('question-container').textContent = 'Game Over! Final Score: ' + score;
+                document.getElementById('answer').style.display = 'none'; // Hide answer input
+                document.querySelector('button').style.display = 'none'; // Hide submit button
+            }
+        }
+
+        function submitAnswer() {
+            const userAnswer = document.getElementById('answer').value.trim();
+            const correctAnswer = questions[currentQuestion].answer;
+
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                score++;
+                document.getElementById('result').textContent = 'Correct!';
+            } else {
+                document.getElementById('result').textContent = 'Wrong! The correct answer was: ' + correctAnswer;
+            }
+
+            currentQuestion++;
+            document.getElementById('score').textContent = score;
+            document.getElementById('answer').value = ''; // Clear input
+            displayQuestion();
+        }
+    </script>
+</body>
+</html>

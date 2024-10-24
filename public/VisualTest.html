@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Test Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #023047;
+            margin-bottom: 20px;
+        }
+        #color-display {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .color-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .color-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            transition: transform 0.3s;
+        }
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #fb8500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #ffb703;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #219ebc;
+        }
+        #score {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #fb8500;
+        }
+        #timer {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #219ebc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Visual Test Game</h1>
+    <p>Remember the color and choose the correct one!</p>
+
+    <div id="color-display"></div>
+    <div class="color-options">
+        <div class="color-option" style="background-color: red;" onclick="checkColor('red')"></div>
+        <div class="color-option" style="background-color: green;" onclick="checkColor('green')"></div>
+        <div class="color-option" style="background-color: blue;" onclick="checkColor('blue')"></div>
+        <div class="color-option" style="background-color: yellow;" onclick="checkColor('yellow')"></div>
+    </div>
+
+    <button onclick="startVisualTest()">Start Game</button>
+    <p id="result"></p>
+    <p id="score">Score: 0</p>
+    <p id="timer">Time: 10s</p>
+
+    <script>
+        let correctColor;
+        let score = 0;
+        let timeLeft = 10;
+        let timerInterval;
+
+        function startVisualTest() {
+            document.getElementById('result').textContent = '';
+            score = 0; // Reset score
+            document.getElementById('score').textContent = 'Score: ' + score; // Display reset score
+            timeLeft = 10; // Reset timer
+            document.getElementById('timer').textContent = 'Time: ' + timeLeft + 's'; // Display reset time
+            
+            timerInterval = setInterval(updateTimer, 1000); // Start timer
+            showRandomColor(); // Start showing colors
+        }
+
+        function showRandomColor() {
+            const colors = ['red', 'green', 'blue', 'yellow'];
+            correctColor = colors[Math.floor(Math.random() * colors.length)];
+            const colorDisplay = document.getElementById('color-display');
+            
+            // Show the correct color for a short time
+            colorDisplay.style.backgroundColor = correctColor;
+            setTimeout(() => {
+                colorDisplay.style.backgroundColor = '#f0f0f0'; // Hide color
+                if (timeLeft > 0) showRandomColor(); // Continue showing colors if time left
+            }, 1500); // Display color for 1.5 seconds
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            document.getElementById('timer').textContent = 'Time: ' + timeLeft + 's';
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval); // Stop the timer
+                document.getElementById('result').textContent = 'Time\'s up! Your final score is: ' + score; // Display final score
+                document.getElementById('color-display').style.backgroundColor = '#f0f0f0'; // Reset color display
+            }
+        }
+
+        function checkColor(selectedColor) {
+            const resultDisplay = document.getElementById('result');
+            if (selectedColor === correctColor) {
+                resultDisplay.textContent = 'Correct! Well done!';
+                score++; // Increment score for a correct answer
+            } else {
+                resultDisplay.textContent = 'Incorrect! Try again.';
+            }
+            document.getElementById('score').textContent = 'Score: ' + score; // Update score display
+        }
+    </script>
+</body>
+</html>

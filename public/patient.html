@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/public/styles.css">
+
+</head>
+<style>
+
+    /* Header Styles */
+    header {
+        background-color: #219ebc;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* Align the back button, title, and menu button */
+    }
+
+
+
+    .back-btn {
+        margin-left: 20px;
+    }
+
+    .menu-btn {
+        margin-right: 20px;
+    }
+
+    /* Navigation Bar Styles */
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: #023047;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        gap: 10px;
+        /* Add spacing between the buttons */
+    }
+
+    nav a {
+        color: white;
+        padding: 14px 25px;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav a:hover {
+        background-color: #8ecae6;
+        color: #023047;
+    }
+
+    /* Section Styles */
+    section {
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    section h2 {
+        font-size: 2rem;
+        color: #023047;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    /* Card Styles */
+    .card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 30px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card h3 {
+        font-size: 1.5rem;
+        color: #023047;
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        margin: 10px 0;
+        line-height: 1.6;
+    }
+
+    .card ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+
+    .card ul li {
+        margin-bottom: 8px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer Styles */
+    footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #023047;
+        color: white;
+        margin-top: 40px;
+    }
+
+    footer a {
+        color: #8ecae6;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    .footer-text {
+        color: white;
+    }
+</style>
+
+<body>
+    <header>
+        <h1>Welcome to Dementia Risk Prediction and Recommender Application</h1>
+
+
+
+
+    </header>
+    <a href="/public/dashboard.html"><img src="Blue_Arrow_Icon_Internet_Logo-removebg-preview.png" alt="chatbot"
+            style="width:100px;height:83px;float:left"></a>
+
+    <a href="/public/settings.html"><img src="burger.png" alt="chatbot" style="width:80px;height:83px;float:right"></a>
+
+
+    <nav>
+        <a href="/public/Prediction_form_2.html">Prediction Form</a>
+        <!-- <a href="/public/Prediction_3.html">Form B</a> -->
+        <a href="/public/recommendations.html">Recommendations</a>
+        <a href="/public/community.html">Community</a>
+        <a href="/public/game.html">Memory Game</a>
+        <!-- <a href="/public/chatBot.html">Chatbot</a>
+        <a href="/public/settings.html">Settings</a> -->
+
+
+
+    </nav>
+
+
+    <section>
+        <h2>How to Use the Application</h2>
+
+        <div class="card">
+            <h3>1. Predict Dementia (Form A)</h3>
+            <p>This form allows you to predict the risk of dementia based on various health metrics.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Click on "Predict Dementia Form A" from the navigation menu.</li>
+                <li>Fill in all the required health and personal details in the form.</li>
+                <li>Click on the "Submit" button to get your dementia risk prediction.</li>
+            </ul>
+        </div>
+
+
+        <div class="card">
+            <h3>3. Personalized Recommendations</h3>
+            <p>Based on your dementia prediction, you will receive tailored recommendations to support brain health.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Click on "Personalized Recommendations" in the menu.</li>
+                <li>View recommendations that align with your prediction results, including diet, activities, and
+                    lifestyle changes.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>4. Community</h3>
+            <p>Engage with the community to share insights and get support from other users.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Select "Community" from the navigation menu.</li>
+                <li>Browse community posts or share your own experiences and questions related to dementia and health.
+                </li>
+                <li>You can also interact with posts by liking or commenting.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>5. Play Memory Match Game</h3>
+            <p>Test and train your memory with a fun and interactive game designed to enhance cognitive skills.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Click on "Play Memory Match Game" from the menu.</li>
+                <li>Follow the on-screen instructions to start the game and match similar cards.</li>
+                <li>Use this game as a tool to boost your memory and have fun while doing it.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>6. Chatbot</h3>
+            <p>Our chatbot helps answer your questions or guides you through different sections of the application.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Select "Chatbot" from the menu.</li>
+                <li>Type your query or question, and the bot will provide you with helpful information or instructions.
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>7. Settings</h3>
+            <p>Manage your account settings such as email, password, and notifications.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Click on "Settings" from the navigation menu.</li>
+                <li>Update your personal information, change your password, or customize your notification preferences.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <a href="/public/chatBot.html"><img src="cb-removebg-preview.png" alt="chatbot"
+                style="width:100px;height:70px;float:right"></a>
+        <p class="footer-text">&copy; 2024 Parallel Group. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
