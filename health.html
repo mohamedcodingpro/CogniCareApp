@@ -7,55 +7,87 @@
     <title>User Dashboard</title>
     <link rel="stylesheet" href="/public/styles.css">
     <style>
-        
-
+        /* Header Styling */
         header {
-            background-color: #219ebc;
-            color: white;
+            background-color: #FB8500; /* Orange header */
+            color: #FFFFFF;
             padding: 15px 0;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
+            font-size: 2rem;
             margin: 0;
-            font-size: 2.5rem;
+            text-align: center;
         }
 
-        nav {
+        /* Navigation and Icon Container */
+        .nav-container {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
             background-color: #023047;
+            padding: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+        /* Back Arrow and Settings Icon Styling */
+        .nav-container a.icon-link {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            text-decoration: none;
+        }
+
+        .nav-container a.icon-link img {
+            width: 40px;
+            height: auto;
+        }
+
+        /* Navigation Links */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+            gap: 20px;
+        }
+
         nav a {
-            color: white;
-            padding: 14px 20px;
+            color: #FFFFFF;
+            padding: 10px 15px;
             text-decoration: none;
             text-align: center;
+            font-weight: bold;
             transition: background-color 0.3s;
         }
 
         nav a:hover {
             background-color: #8ecae6;
+            color: #023047;
+            border-radius: 5px;
         }
 
+        /* Section Styling */
         section {
             padding: 20px;
             max-width: 1200px;
             margin: 20px auto;
+            background-color: #F9FAFB;
+            border-radius: 8px;
         }
 
         h2 {
             text-align: center;
             color: #023047;
-            margin-bottom: 40px;
             font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: bold;
         }
 
+        /* Card Styling */
         .card {
-            background-color: #ffffff;
+            background-color: #FFFFFF;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -76,40 +108,58 @@
         .card p {
             margin: 5px 0;
             line-height: 1.6;
+            color: #555;
         }
 
+        /* Footer Styling */
         footer {
             text-align: center;
             padding: 15px 0;
             background-color: #023047;
-            color: white;
+            color: #FFFFFF;
             margin-top: 40px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .footer-text {
             margin: 0;
+            font-size: 1.1em;
+        }
+
+        footer a img {
+            width: 60px;
+            height: 30;
+            float: right;
+            margin-right: 15px;
+            transition: transform 0.3s;
+        }
+
+        footer a img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Welcome to Dementia Prediction and Recomender Application</h1>
-
+        <h1>Welcome to Dementia Prediction and Recommender Application</h1>
     </header>
-    <a href="/public/dashboard.html"><img src="Blue_Arrow_Icon_Internet_Logo-removebg-preview.png" alt="chatbot"
-            style="width:80px;height:83px;float:left"></a>
 
-    <a href="/public/settings.html"><img src="burger.png" alt="chatbot" style="width:80px;height:83px;float:right"></a>
-
-    <nav>
-        <a href="/public/Prediction_form_2.html">Predict Form A</a>
-        <a href="/public/prediction-form_1.html">Predict Form B</a>
-        <a href="/public/Prediction_3.html">Predict Form C</a>
-        <a href="/public/recommendations.html">Recommendations</a>
-        <!-- <a href="/public/chatBot.html">Chatbot</a>
-        <a href="/public/settings.html">Settings</a> -->
-    </nav>
+    <!-- Navigation with Icons on the Sides -->
+    <div class="nav-container">
+        <a href="/public/dashboard.html" class="icon-link">
+            <img src="Blue_Arrow_Icon_Internet_Logo-removebg-preview.png" alt="Back">
+        </a>
+        <nav>
+            <a href="/public/Prediction_form_2.html">Predict Form A</a>
+            <a href="/public/prediction-form_1.html">Predict Form B</a>
+            <a href="/public/Prediction_3.html">Predict Form C</a>
+            <a href="/public/recommendations.html">Recommendations</a>
+        </nav>
+        <a href="/public/settings.html" class="icon-link">
+            <img src="burger.png" alt="Settings">
+        </a>
+    </div>
 
     <section>
         <h2>How to Use the Application</h2>
@@ -170,9 +220,9 @@
     </section>
 
     <footer>
-
-        <a href="/public/chatBot.html"><img src="cb-removebg-preview.png" alt="chatbot"
-                style="width:100px;height:70px;float:right"></a>
+        <a href="/public/chatBot.html">
+            <img src="cb-removebg-preview.png" alt="Chatbot" width="60" height="35">
+        </a>
         <p class="footer-text">&copy; 2024 Parallel Group. All Rights Reserved.</p>
     </footer>
 </body>

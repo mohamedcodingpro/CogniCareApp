@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Dementia Prediction App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Sidebar Navigation -->
+    <div class="flex">
+        <nav class="w-64 h-screen bg-blue-700 text-white p-6">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold">Dementia App</h1>
+            </div>
+            <ul>
+                <li class="my-4"><a href="#home" class="text-lg hover:text-blue-300 transition-colors duration-200">🏠 Home</a></li>
+                <li class="my-4"><a href="#results" class="text-lg hover:text-blue-300 transition-colors duration-200">📊 Prediction Results</a></li>
+                <li class="my-4"><a href="#recommendations" class="text-lg hover:text-blue-300 transition-colors duration-200">💡 Recommendations</a></li>
+                <li class="my-4"><a href="#profile" class="text-lg hover:text-blue-300 transition-colors duration-200">👤 Profile</a></li>
+            </ul>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <main class="flex-1 p-8 bg-gray-100">
+            <!-- Prediction Results Section -->
+            <section id="results" class="mb-12">
+                <h2 class="text-4xl font-semibold text-blue-700 mb-6">Prediction Results</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p id="predictionResult" class="text-lg text-gray-800">Loading prediction...</p>
+                </div>
+            </section>
+
+            <!-- Recommendations Section -->
+            <section id="recommendations" class="mb-12">
+                <h2 class="text-4xl font-semibold text-blue-700 mb-6">Recommendations</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-gray-800">Based on your profile, here are some health tips and recommendations to help manage cognitive health.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript for Fetching Prediction -->
+    <script>
+        // Sample user data, replace with dynamic data as needed
+        const userData = {
+            age: 65,
+            gender: "male",
+            education: 16
+        };
+
+        // Fetch prediction from backend API
+        fetch('http://localhost:5000/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('predictionResult').innerText = `Prediction: ${data.prediction}`;
+        })
+        .catch(error => {
+            document.getElementById('predictionResult').innerText = `Error: ${error.message}`;
+        });
+    </script>
+</body>
+</html>
+

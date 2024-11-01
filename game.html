@@ -5,57 +5,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Match Game</title>
-    <link rel="stylesheet" href="/public/styles.css">
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: #90E0EF;
+            background-color: #F0F4F8;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
+        /* Header Styling */
         header {
             text-align: center;
-            margin-bottom: 20px;
+            padding: 20px;
             background-color: #fb8500;
-            ;
-            border-radius: 15px;
+            color:  #023047;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
-            color: #03045E;
             font-size: 2.5em;
+            font-weight: bold;
             margin: 0;
         }
 
-
-
-        .game-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        header img {
+            width: 80px;
+            height: auto;
+            margin-top: 10px;
         }
 
+        /* Game Container */
+        .game-container {
+            width: 90%;
+            max-width: 800px;
+            background: #FFFFFF;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .game-container h2 {
+            color: #0077B6;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Game Board Grid */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            justify-items: center;
+            margin-top: 10px;
+        }
+
+        /* Card Styling */
         .card {
             width: 100px;
             height: 100px;
             background: #0077B6;
-            color: #fff;
-            display: inline-block;
-            line-height: 100px;
-            text-align: center;
+            color: #FFFFFF;
             font-size: 24px;
-            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
             cursor: pointer;
-            border-radius: 5px;
             user-select: none;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
         }
 
         .card.flipped {
             background: #00B4D8;
+            transform: rotateY(180deg);
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: auto;
+            padding: 15px;
+            background-color: #023047;
+            color: #FFFFFF;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1.1em;
+        }
+
+        footer a {
+            color: #ffdd00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #fb8500;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -63,8 +122,7 @@
 <body>
     <header>
         <h1>Memory Match Game</h1>
-        <img src="/public/gameig.png" alt="game" style="width: 100px; height: auto;">
-
+        <img src="/public/gameig.png" alt="game">
     </header>
 
     <div class="game-container">
@@ -107,7 +165,7 @@
             if (card1.dataset.symbol === card2.dataset.symbol) {
                 matchedPairs++;
                 if (matchedPairs === symbols.length) {
-                    alert('Congratulations! You matched all pairs!');
+                    setTimeout(() => alert('Congratulations! You matched all pairs!'), 100);
                 }
             } else {
                 card1.textContent = '?';
@@ -121,6 +179,7 @@
 
         cards.forEach(symbol => gameBoard.appendChild(createCard(symbol)));
     </script>
+
     <footer>
         <p><a href="/public/dashboard.html">Back to Dashboard</a></p>
     </footer>

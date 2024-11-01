@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Health Recommendations</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ6sb8pocXaDao8L9I4XzK1dwjrMpLsAo&callback=initMap" async defer></script>
+    <style>
+        /* Custom Colors */
+        .bg-navy { background-color: #001f3f; }
+        .text-navy { color: #001f3f; }
+        .bg-orange { background-color: #ff8c00; }
+        .text-orange { color: #ff8c00; }
+        .hover\:text-navy:hover { color: #001f3f; }
+        .transition { transition: color 0.3s ease, background-color 0.3s ease; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url(pexels-pixabay-255527.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #001f3f; /* Navy Blue */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ff8c00; /* Orange */
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-arrow img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        #statusSelector,
+        #provinceSelector,
+        #recommendations,
+        #mapContainer {
+            background-color: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        #recommendations h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #001f3f; /* Navy */
+        }
+
+        #recommendations ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        #recommendations li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #doctorInfo {
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        #doctorInfo p {
+            margin: 10px 0;
+            background-color: #e7f3fe;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* New Styles for Button */
+        #memoryGameButton {
+            background-color: #001f3f; /* Match header color */
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #memoryGameButton:hover {
+            background-color: #1987a8; /* Darker shade on hover */
+        }
+
+        /* Center footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #001f3f; /* Navy Blue */
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="back-arrow" onclick="goBack()">
+        
+            <a href="./prediction-form_1.html" alt="Back Arrow"></a>
+            <span>Back</span>
+        </div>
+    </div>
+
+    <header>
+        <h1>Personalized Health Recommendations</h1>
+    </header>
+
+    <section id="statusSelector">
+        <label for="dementiaStatus">Select your status:</label>
+        <select id="dementiaStatus" onchange="showRecommendations()">
+            <option value="">--Select Status--</option>
+            <option value="demented">Demented</option>
+            <option value="converted">Converted</option>
+            <option value="nondemented">Non-Demented</option>
+        </select>
+    </section>
+
+    <section id="recommendations"></section>
+
+    <section id="provinceSelector" style="display: none;">
+        <label for="province">Select a province:</label>
+        <select id="province" onchange="showSpecialists()">
+            <option value="">--Select a Province--</option>
+            <option value="Gauteng">Gauteng</option>
+            <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+            <option value="Limpopo">Limpopo</option>
+            <option value="Mpumalanga">Mpumalanga</option>
+            <option value="Northern Cape">Northern Cape</option>
+            <option value="North West">North West</option>
+            <option value="Western Cape">Western Cape</option>
+            <option value="Free State">Free State</option>
+            <option value="Eastern Cape">Eastern Cape</option>
+        </select>
+    </section>
+
+    <section id="mapContainer" style="display: none;">
+        <div id="map"></div>
+        <div id="doctorInfo"></div>
+    </section>
+
+    <!-- Memory Game Button -->
+    <button id="memoryGameButton" onclick="startMemoryGame()">Start Memory Game</button>
+
+    <footer>
+        <p>&copy; 2024 Personalized Health Recommendations. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let map;
+        let markers = [];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -30.5595, lng: 22.9375 },
+                zoom: 6
+            });
+        }
+
+        function showRecommendations() {
+            const status = document.getElementById('dementiaStatus').value;
+            const recommendationsDiv = document.getElementById('recommendations');
+            const provinceSelector = document.getElementById('provinceSelector');
+            const mapContainer = document.getElementById('mapContainer');
+
+            let recommendationsHTML = '';
+
+            switch (status) {
+                case 'demented':
+                    recommendationsHTML = `
+                        <h2>Recommendations for Demented Individuals</h2>
+                        <ul>
+                            <li>Establish daily routines to reduce confusion and anxiety.</li>
+                            <li>Create a safe home environment by removing tripping hazards and installing safety features.</li>
+                            <li>Encourage regular physical activity appropriate for their abilities.</li>
+                            <li>Provide cognitive stimulation through puzzles, music, or reminiscence therapy.</li>
+                            <li>Ensure proper nutrition and hydration.</li>
+                            <li>Maintain social connections and engage in meaningful activities.</li>
+                            <li>Consider professional in-home care or assisted living options.</li>
+                            <li>Regularly consult with healthcare providers for medication management and overall care.</li>
+                        </ul>
+                        <p>Please select a province below to find specialized doctors in your area.</p>
+                    `;
+                    provinceSelector.style.display = 'block';
+                    mapContainer.style.display = 'block';
+                    break;
+                case 'converted':
+                    recommendationsHTML = `
+                        <h2>Recommendations for Converted Individuals</h2>
+                        <ul>
+                            <li>Adhere strictly to prescribed medications and treatment plans.</li>
+                            <li>Engage in regular cognitive training exercises to maintain mental function.</li>
+                            <li>Maintain a healthy lifestyle with balanced diet and regular exercise.</li>
+                            <li>Stay socially active and maintain strong support networks.</li>
+                            <li>Monitor symptoms closely and report any changes to healthcare providers.</li>
+                            <li>Attend regular follow-up appointments for ongoing assessments.</li>
+                        </ul>
+                        <p>Please select a province below to find specialized doctors in your area.</p>
+                    `;
+                    provinceSelector.style.display = 'block';
+                    mapContainer.style.display = 'block';
+                    break;
+                case 'nondemented':
+                    recommendationsHTML = `
+                        <h2>Recommendations for Non-Demented Individuals</h2>
+                        <ul>
+                            <li>Engage in regular physical and mental exercise.</li>
+                            <li>Follow a balanced diet rich in fruits, vegetables, and omega-3 fatty acids.</li>
+                            <li>Maintain social connections and partake in community activities.</li>
+                            <li>Practice stress reduction techniques such as mindfulness or yoga.</li>
+                            <li>Schedule regular health check-ups and screenings.</li>
+                            <li>Consider memory-enhancing activities or workshops.</li>
+                        </ul>
+                    `;
+                    provinceSelector.style.display = 'none';
+                    mapContainer.style.display = 'none';
+                    break;
+                default:
+                    recommendationsHTML = '';
+            }
+
+            recommendationsDiv.innerHTML = recommendationsHTML;
+        }
+
+        function showSpecialists() {
+            const province = document.getElementById('province').value;
+            const doctorInfoDiv = document.getElementById('doctorInfo');
+
+            // Clear previous markers
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+
+            // Fetch and display doctors based on the selected province
+            if (province) {
+                const doctors = getDoctorsByProvince(province); // Fetch doctor data based on the selected province
+                doctorInfoDiv.innerHTML = `<h2>Doctors in ${province}</h2>`;
+                doctors.forEach(doctor => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: doctor.lat, lng: doctor.lng },
+                        map: map,
+                        title: doctor.name
+                    });
+                    markers.push(marker);
+
+                    doctorInfoDiv.innerHTML += `<p><strong>${doctor.name}</strong><br>${doctor.specialty}<br>Contact: ${doctor.contact}</p>`;
+                });
+
+                // Center the map based on markers
+                if (markers.length > 0) {
+                    const bounds = new google.maps.LatLngBounds();
+                    markers.forEach(marker => bounds.extend(marker.getPosition()));
+                    map.fitBounds(bounds);
+                }
+            } else {
+                doctorInfoDiv.innerHTML = '';
+                initMap(); // Reset map
+            }
+        }
+
+        function getDoctorsByProvince(province) {
+            // Sample data representing doctors
+            const doctorData = {
+                Gauteng: [
+                    { name: 'Dr. John Smith', specialty: 'Neurologist', contact: '012 345 6789', lat: -25.7479, lng: 28.2293 },
+                    { name: 'Dr. Jane Doe', specialty: 'Psychiatrist', contact: '012 345 6789', lat: -25.7479, lng: 28.2293 },
+                ],
+                'KwaZulu-Natal': [
+                    { name: 'Dr. Alan Turing', specialty: 'Gerontologist', contact: '031 987 6543', lat: -29.8587, lng: 31.0218 },
+                ],
+                Limpopo: [
+                    { name: 'Dr. Maria Curie', specialty: 'Family Medicine', contact: '015 876 5432', lat: -23.9036, lng: 29.4590 },
+                ],
+                // Add other provinces similarly...
+            };
+
+            return doctorData[province] || [];
+        }
+
+        function startMemoryGame() {
+            alert("Memory Game feature is under development!");
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

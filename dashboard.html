@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom Colors */
+        .bg-navy { background-color: #001f3f; }
+        .text-navy { color: #001f3f; }
+        .bg-orange { background-color: #ff8c00; }
+        .text-orange { color: #ff8c00; }
+        .hover\:text-navy:hover { color: #001f3f; }
+        .transition { transition: color 0.3s ease, background-color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Wrapper -->
+    <div class="flex">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="w-64 h-screen bg-orange text-white p-6">
+            <div class="mb-8">
+              
+                <div style="display: flex; align-items: center;">
+                    <img src="/public/logo10-removebg-preview.png" style="width: 60px; height: auto; margin: 0; padding: 0;">
+                    <h1 class="text-2xl font-bold" style="margin: 0; padding: 0;">Cognicare App</h1>
+                </div>
+                
+            </div>
+            <ul>
+                <li class="my-4"><a href="./index.html" " class="text-lg hover:text-navy transition">🏠 Home</a></li>
+                <li class="my-4"><a href="#how-to-use" class="text-lg hover:text-navy transition">📖 How to Use</a></li>
+                
+                
+                <a href="./contact.html" class="text-lg hover:text-orange transition">📞 Contact Us</a></li>
+                <li class="my-4"><a href="./Team.html" class="text-lg hover:text-navy transition">ℹ️ About Us</li>
+
+                
+            
+                <li class="my-4"><a href="/public/caregiver.html" class="text-lg hover:text-navy transition">👥 Caregiver</a></li>
+                <li class="my-4"><a href="/public/patient.html" class="text-lg hover:text-navy transition">👤 Patient</a></li>
+                <li class="my-4"><a href="/public/health.html" class="text-lg hover:text-navy transition">🩺 Health Specialist</a></li>
+                <a href="./game.html" class="text-lg hover:text-orange transition">🎮 Games</a>
+                <li class="my-4"><a href="FAQ.html" class="text-lg hover:text-navy transition">❓ Help</a></li>
+
+            </ul>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <main class="flex-1">
+            <!-- Header with Settings Icon -->
+            <header class="flex justify-between items-center p-8 bg-navy text-white shadow-md">
+                <h1 class="text-3xl font-bold">Welcome to Dementia Risk Prediction-CogniCare Application</h1>
+                <a href="/public/settings.html" class="text-orange hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 10c-2.97 0-5.8-.83-8.17-2.24L2.83 21 1 19.17l2.83-2.83C2.83 14.8 2 11.97 2 9c0-3.07.83-5.8 2.24-8.17L1 1l1.83-1L4.24 3.83C6.2 2.83 9 2 12 2s5.8.83 8.17 2.24L23 1l2 1.83-2.83 2.83C21.17 6.2 22 9 22 12c0 3.07-.83 5.8-2.24 8.17L23 23l-1.83 2L19.76 21.17C17.8 22.17 15 23 12 23z"/>
+                    </svg>
+                </a>
+            </header>
+
+            <!-- How-To Section -->
+            <section id="how-to-use" class="p-8 bg-gray-100">
+                <h2 class="text-4xl font-semibold text-navy mb-6">How to Use This Application</h2>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold text-orange mb-4">1. Caregiver Section</h3>
+                    <p class="text-lg text-gray-800 mb-6">The Caregiver section allows users responsible for individuals with dementia to manage their care routines, receive helpful recommendations, and track the patient's progress. To navigate, click on the "Caregiver" button in the menu above.</p>
+                    
+                    <h3 class="text-2xl font-semibold text-orange mb-4">2. Patient Section</h3>
+                    <p class="text-lg text-gray-800 mb-6">The Patient section is designed for individuals who want to monitor their cognitive health or those at risk of dementia. Click the "Patient" button to access tools such as dementia risk prediction, cognitive tests, and personalized recommendations.</p>
+
+                    <h3 class="text-2xl font-semibold text-orange mb-4">3. Health Specialist Section</h3>
+                    <p class="text-lg text-gray-800 mb-6">The Health Specialist section enables professionals to assist patients by viewing prediction results and offering expert guidance. Click the "Health Specialist" button to explore the features tailored for professionals.</p>
+
+                    <h3 class="text-2xl font-semibold text-orange mb-4">4. Settings</h3>
+                    <p class="text-lg text-gray-800 mb-6">In the Settings section, users can manage their account details, privacy settings, and notifications. Click the "Settings" button to customize your experience in the application.</p>
+
+                    <h3 class="text-2xl font-semibold text-orange mb-4">5. Getting Started</h3>
+                    <p class="text-lg text-gray-800 mb-6">To start using the application, navigate to your respective section (Caregiver, Patient, or Health Specialist), and follow the instructions provided. You can generate dementia risk predictions, view recommendations, or adjust account settings as needed.</p>
+
+                    <h3 class="text-2xl font-semibold text-orange mb-4">6. Predictions and Recommendations</h3>
+                    <p class="text-lg text-gray-800">After navigating to the "Patient" section, use the dementia risk prediction tool by entering the necessary data, and view the results and personalized recommendations. Caregivers and health specialists can use this data to provide better care and guidance.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center p-4 bg-navy text-white mt-12">
+        <p>&copy; 2024 Parallel Universe Group. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

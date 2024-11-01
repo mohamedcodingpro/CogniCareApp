@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/styles.css">
+    <style>
+        /* Custom Colors */
+        .bg-navy {
+            background-color: #001f3f;
+        }
+
+        .text-navy {
+            color: #001f3f;
+        }
+
+        .bg-orange {
+            background-color: #ff8c00;
+        }
+
+        .text-orange {
+            color: #ff8c00;
+        }
+
+        .hover\:text-navy:hover {
+            color: #001f3f;
+        }
+
+        .transition {
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .back-arrow span {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <header class="bg-navy text-white p-6 text-center">
+        <h1 class="text-3xl font-bold">Welcome to Dementia Risk Prediction and Recommender Application</h1>
+    </header>
+
+    <nav class="flex justify-between items-center bg-orange p-4">
+        <div class="back-arrow" onclick="goBack()">
+            <span>&larr; Back</span>
+        </div>
+        <div class="flex space-x-4">
+            <a href="/public/Prediction_form_2.html" class="text-white hover:text-navy transition px-4">Predict Form</a>
+            <a href="/public/recommendations.html" class="text-white hover:text-navy transition px-4">Recommendations</a>
+            <a href="/public/community.html" class="text-white hover:text-navy transition px-4">Community</a>
+            <a href="/public/game.html" class="text-white hover:text-navy transition px-4">Memory Game</a>
+        </div>
+    </nav>
+
+    <section id="instructions" class="p-8 bg-gray-100">
+        <h2 class="text-4xl font-semibold text-navy mb-6">How to Use This Application</h2>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-4">
+            <h3 class="text-2xl font-semibold text-orange">Step 1: Choose a Prediction Form</h3>
+            <p>Select one of the forms to start predicting dementia. Each form is designed to assess different aspects.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-4">
+            <h3 class="text-2xl font-semibold text-orange">Step 2: View Personalized Recommendations</h3>
+            <p>After completing a prediction, check the recommendations section for tailored advice based on your results.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-4">
+            <h3 class="text-2xl font-semibold text-orange">Step 3: Engage in the Community Forum</h3>
+            <p>Join discussions, share experiences, and learn from others in our community forum.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-4">
+            <h3 class="text-2xl font-semibold text-orange">Step 4: Play the Memory Match Game</h3>
+            <p>Enhance your cognitive skills by playing the Memory Match Game available in the dashboard.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-4">
+            <h3 class="text-2xl font-semibold text-orange">Step 5: Use Chatbot</h3>
+            <p>For any inquiries or support, interact with our chatbot for instant assistance.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-4">
+            <h3 class="text-2xl font-semibold text-orange">Step 6: Update Your Settings</h3>
+            <p>Customize your account settings, change your password, and update your profile as needed.</p>
+        </div>
+    </section>
+
+    <footer class="text-center p-4 bg-navy text-white">
+        <p>&copy; 2024 Parallel Group. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
